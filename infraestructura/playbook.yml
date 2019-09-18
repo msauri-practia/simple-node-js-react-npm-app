@@ -33,4 +33,7 @@
   become: yes
 
   tasks:
-    # Copiar los archivos
+   - name: Copiar archivos a apache
+     copy:
+      src:  build/
+      dest: /var/www/html/
