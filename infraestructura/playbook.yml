@@ -2,9 +2,16 @@
   become: yes
 
   tasks:
-    # Instalar apache
+    - name: Instalar apache (httpd)
+    yum:
+      name: httpd
+      state: latest
 
-    # Iniciar apache
+
+    - name: Iniciar apache
+    service:
+      name: httpd
+      state: started
 
     - name: Asegurar que selinux este deshabilitado  # Necesario para cambiar el puerto de apache
       selinux: state=permissive policy=targeted
@@ -17,7 +24,10 @@
         state: 'present'
         backrefs: yes
 
-    # Reiniciar apache
+    - name: reiniciar apache
+    service:
+      name: httpd
+      state: restarted
 
 - hosts: desplegar
   become: yes
